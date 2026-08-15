@@ -1,0 +1,234 @@
+:root {
+  --bg: #0a0f1c;
+  --bg-panel: #10182a;
+  --bg-panel-raised: #141e34;
+  --border: #223049;
+  --border-soft: #1a2438;
+  --text: #e8edf6;
+  --text-dim: #8b9ab3;
+  --text-faint: #3d4a63;
+  --accent: #5eead4;
+  --accent-dim: #2d5f56;
+  --get: #5eead4;
+  --post: #f5a94e;
+  --patch: #b794f6;
+  --delete: #f76e6e;
+  --ring-1: #22304955;
+  --ring-2: #22304966;
+  --ring-3: #22304944;
+
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f6f7fb;
+  --bg-panel: #ffffff;
+  --bg-panel-raised: #ffffff;
+  --border: #dde2ec;
+  --border-soft: #e8ebf2;
+  --text: #101828;
+  --text-dim: #4c5768;
+  --text-faint: #97a1b3;
+  --accent: #0f9488;
+  --accent-dim: #cdeee8;
+  --get: #0f9488;
+  --post: #b45309;
+  --patch: #7c3aed;
+  --delete: #dc2626;
+  --ring-1: #c7cfdd77;
+  --ring-2: #c7cfdd88;
+  --ring-3: #c7cfdd55;
+
+  color-scheme: light;
+}
+
+body {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--text);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.doc-content h1,
+.doc-content h2,
+.doc-content h3 {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.doc-content h1 {
+  font-size: 24px;
+  margin: 0 0 20px;
+}
+
+.doc-content h2 {
+  font-size: 18px;
+  margin: 40px 0 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.doc-content h3 {
+  font-size: 15px;
+  margin: 28px 0 10px;
+  color: var(--accent);
+}
+
+.doc-content p {
+  margin: 0 0 14px;
+  color: var(--text-dim);
+}
+
+.doc-content strong {
+  color: var(--text);
+}
+
+.doc-content ul,
+.doc-content ol {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  color: var(--text-dim);
+}
+
+.doc-content li {
+  margin-bottom: 6px;
+}
+
+.doc-content li::marker {
+  color: var(--accent);
+}
+
+.doc-content code {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+.doc-content pre {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 0 0 16px;
+}
+
+.doc-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text);
+}
+
+.doc-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 20px;
+  font-size: 13.5px;
+}
+
+.doc-content th,
+.doc-content td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  color: var(--text-dim);
+}
+
+.doc-content th {
+  background: var(--bg-panel);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.doc-content blockquote {
+  margin: 0 0 16px;
+  padding: 4px 16px;
+  border-left: 2px solid var(--accent);
+  color: var(--text-dim);
+}
+
+.doc-content hr {
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  margin: 28px 0;
+}
+
+.doc-content a {
+  color: var(--accent);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-panel-raised);
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.icon-btn.copied {
+  color: var(--accent);
+  border-color: var(--accent);
+}
