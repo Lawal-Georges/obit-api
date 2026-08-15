@@ -217,6 +217,36 @@ export default function Home() {
             User stories, modele de donnees, regles d&apos;autorisation.
           </div>
         </Link>
+
+        <Link
+          href="/api-docs"
+          style={{
+            display: "block",
+            border: "1px solid var(--border)",
+            borderRadius: "10px",
+            background: "var(--bg-panel-raised)",
+            padding: "20px",
+            textDecoration: "none",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "11px",
+              color: "var(--accent)",
+              letterSpacing: "0.08em",
+              marginBottom: "6px",
+            }}
+          >
+            EXPLORATEUR
+          </div>
+          <div style={{ color: "var(--text)", fontSize: "14px", marginBottom: "4px" }}>
+            Essayer l&apos;API en direct
+          </div>
+          <div style={{ color: "var(--text-dim)", fontSize: "13px" }}>
+            Interface interactive, testez chaque route depuis le navigateur.
+          </div>
+        </Link>
       </section>
     </main>
   );

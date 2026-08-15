@@ -1,8 +1,17 @@
+export type QueryParam = {
+  name: string;
+  enumValues?: string[];
+  placeholder?: string;
+};
+
 export type ApiRoute = {
   method: "GET" | "POST" | "PATCH" | "DELETE";
   path: string;
   role: string;
   access: string;
+  // Utilises par l'explorateur interactif (/api-docs) pour construire le formulaire :
+  queryParams?: QueryParam[];
+  sampleBody?: Record<string, unknown>;
 };
 
 export type ApiGroup = {
@@ -22,6 +31,7 @@ export const apiGroups: ApiGroup[] = [
         path: "/api/login",
         role: "Verifie l'email et le mot de passe, puis pose le cookie de session.",
         access: "Public",
+        sampleBody: { email: "alice@orbit.test", password: "password123" },
       },
       {
         method: "POST",
@@ -53,6 +63,7 @@ export const apiGroups: ApiGroup[] = [
         path: "/api/projects",
         role: "Cree un projet ; le createur en devient automatiquement le responsable.",
         access: "Authentifie",
+        sampleBody: { name: "Projet test", description: "Cree depuis l'explorateur" },
       },
       {
         method: "GET",
@@ -65,6 +76,7 @@ export const apiGroups: ApiGroup[] = [
         path: "/api/projects/:id",
         role: "Modifie le nom ou la description du projet.",
         access: "Responsable uniquement",
+        sampleBody: { description: "Description mise a jour" },
       },
       {
         method: "DELETE",
@@ -84,12 +96,18 @@ export const apiGroups: ApiGroup[] = [
         path: "/api/projects/:id/tasks",
         role: "Liste les taches d'un projet, filtrable par status, priority, assigned_user_id.",
         access: "Responsable ou membre du projet",
+        queryParams: [
+          { name: "status", enumValues: ["", "TODO", "IN_PROGRESS", "DONE"] },
+          { name: "priority", enumValues: ["", "LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+          { name: "assigned_user_id", placeholder: "uuid (optionnel)" },
+        ],
       },
       {
         method: "POST",
         path: "/api/projects/:id/tasks",
         role: "Cree une tache dans le projet (titre, priorite, assignation...).",
         access: "Responsable du projet",
+        sampleBody: { title: "Nouvelle tache", priority: "HIGH" },
       },
       {
         method: "GET",
@@ -102,12 +120,14 @@ export const apiGroups: ApiGroup[] = [
         path: "/api/tasks/:id",
         role: "Modifie le contenu complet d'une tache (titre, priorite, assignation...).",
         access: "Responsable du projet",
+        sampleBody: { priority: "CRITICAL" },
       },
       {
         method: "PATCH",
         path: "/api/tasks/:id/status",
         role: "Fait evoluer uniquement le statut (TODO / IN_PROGRESS / DONE).",
         access: "Responsable du projet ou utilisateur assigne",
+        sampleBody: { status: "DONE" },
       },
       {
         method: "DELETE",

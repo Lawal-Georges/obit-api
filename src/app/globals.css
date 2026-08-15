@@ -364,14 +364,8 @@ html[data-theme="light"] .theme-icon .icon-sun {
 .footer-links {
   margin-top: 56px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
-}
-
-@media (max-width: 560px) {
-  .footer-links {
-    grid-template-columns: 1fr;
-  }
 }
 
 .doc-header {
@@ -389,3 +383,212 @@ html[data-theme="light"] .theme-icon .icon-sun {
     white-space: nowrap;
   }
 }
+
+/* ---------- Page /api-docs (explorateur interactif maison) ---------- */
+
+.explorer-group-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+
+.explorer-group-intro {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+  max-width: 640px;
+}
+
+.explorer-stack {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-panel);
+  overflow: hidden;
+}
+
+.explorer-card {
+  border-top: 1px solid var(--border-soft);
+}
+
+.explorer-card:first-child {
+  border-top: none;
+}
+
+.explorer-card-header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding: 14px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-sans);
+  color: var(--text);
+}
+
+.explorer-method {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  min-width: 58px;
+}
+
+.explorer-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.explorer-path {
+  font-size: 13.5px;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.explorer-role {
+  font-size: 13.5px;
+  color: var(--text-dim);
+  flex: 1 1 220px;
+}
+
+.explorer-chevron {
+  font-size: 12px;
+  color: var(--text-faint);
+  transition: transform 0.2s ease;
+}
+
+.explorer-chevron.open {
+  transform: rotate(180deg);
+}
+
+.explorer-body {
+  padding: 4px 18px 18px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.explorer-field-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.explorer-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  flex: 1 1 160px;
+}
+
+.explorer-field-body {
+  margin-top: 14px;
+  flex: 1 1 100%;
+}
+
+.explorer-field input,
+.explorer-field select,
+.explorer-field textarea {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  outline: none;
+}
+
+.explorer-field textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.explorer-field input:focus,
+.explorer-field select:focus,
+.explorer-field textarea:focus {
+  border-color: var(--accent);
+}
+
+.explorer-execute {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.explorer-execute:hover {
+  opacity: 0.88;
+}
+
+.explorer-execute:active {
+  transform: scale(0.97);
+}
+
+.explorer-execute:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.explorer-result {
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.explorer-result-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.explorer-status-badge {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.explorer-duration {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.explorer-result pre {
+  margin: 0;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-dim);
+  overflow-x: auto;
+  max-height: 320px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
