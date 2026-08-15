@@ -26,6 +26,7 @@ export function ThemeToggle() {
       aria-label={theme === "light" ? "Passer en theme sombre" : "Passer en theme clair"}
       title={theme === "light" ? "Theme sombre" : "Theme clair"}
       className="icon-btn"
+      style={{ position: "fixed", top: "20px", right: "20px", zIndex: 50 }}
     >
       {theme === "light" ? (
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
