@@ -162,3 +162,43 @@ Problemes identifies (transposables a l'equivalent Next.js) :
   si le volume de donnees le justifie en production.
 - `npx prisma generate` necessite un acces reseau complet (telecharge le moteur Prisma) ;
   a executer dans un environnement avec acces internet standard.
+
+## Deploiement (Vercel + Neon)
+
+Deploiement teste et fonctionnel sur Vercel avec une base Neon (PostgreSQL serverless).
+Deux pieges rencontres en le mettant en place, resolus ici pour eviter de les reproduire :
+
+1. **`PrismaClientInitializationError` au build** — Vercel met `node_modules` en cache
+   entre les deploiements, ce qui empeche `prisma generate` de se relancer automatiquement.
+   Sans le client Prisma regenere, le build echoue. Fix : le script `postinstall` dans
+   `package.json` (`"postinstall": "prisma generate"`) force sa regeneration a chaque
+   `npm install`, cache ou non.
+2. **`Can't reach database server at localhost:5432` en production** — `DATABASE_URL` doit
+   pointer vers une base accessible depuis internet, jamais vers `localhost` (qui ne
+   designe que la machine locale, pas le serveur de Vercel). Fix : provisionner une base
+   via Vercel -> onglet **Storage** -> **Create Database** -> **Neon** ; l'integration
+   configure automatiquement `DATABASE_URL` (variante "pooled", adaptee au serverless) sur
+   le projet Vercel.
+
+Etapes pour reproduire un deploiement complet :
+
+```bash
+# 1. Sur Vercel : Storage -> Create Database -> Neon -> Connect to Project
+#    (coche Production, laisse Custom Prefix vide pour garder le nom DATABASE_URL)
+
+# 2. En local, dans .env : colle la variable DATABASE_URL_UNPOOLED du Quickstart Neon
+#    (sans "-pooler" dans le nom d'hote) sous le nom DATABASE_URL, pour eviter les
+#    soucis de compatibilite entre Prisma Migrate et le pooler pgbouncer de Neon.
+npx prisma migrate deploy
+npm run prisma:seed
+
+# 3. Sur Vercel : Settings -> Environment Variables -> ajouter JWT_SECRET
+#    (DATABASE_URL est deja configuree automatiquement par l'integration Neon)
+
+# 4. Deployments -> Redeploy, pour que le build prenne en compte postinstall
+#    et que les fonctions serverless lisent les nouvelles variables d'environnement.
+```
+
+Une fois deploye, `DATABASE_URL` en production peut garder la variante "pooled"
+(avec `-pooler`) — optimisee pour de nombreuses invocations serverless courtes — tandis
+que le poste de developpement utilise la variante "unpooled" pour les migrations.

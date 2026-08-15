@@ -246,12 +246,10 @@ button:focus-visible {
 
 /* Halo lumineux continu, en respiration lente, uniquement sur le bouton de theme */
 @keyframes glow-breathe {
-
   0%,
   100% {
     box-shadow: 0 0 5px 0 var(--accent-dim);
   }
-
   50% {
     box-shadow: 0 0 14px 3px var(--accent-dim);
   }
