@@ -5,6 +5,11 @@ export const metadata = {
   description: "API de suivi de projets et taches - test technique",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 // Applique le theme sauvegarde (ou la preference systeme) avant le premier
 // rendu pour eviter un flash de theme incorrect (FOUC) au chargement.
 const themeInitScript = `

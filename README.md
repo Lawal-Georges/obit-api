@@ -1,7 +1,5 @@
 # Orbit — API de suivi de projets et taches (Next.js)
 
-# DeV EYUM GEORGES
-
 Adaptation en Next.js (App Router, TypeScript) + Prisma + PostgreSQL du test technique
 "Developpeur Laravel — Junior/Mid". Couvre le dossier d'analyse (Phase A, voir
 `analysis/README.md`) et l'implementation API complete (Phase B).
@@ -36,17 +34,17 @@ Comptes de demonstration (mot de passe `password123`) :
 
 ## Routes disponibles
 
-| Methode            | Route                       | Acces                                                                                           |
-| ------------------ | --------------------------- | ----------------------------------------------------------------------------------------------- |
-| POST               | `/api/login`                | public                                                                                          |
-| POST               | `/api/logout`               | authentifie                                                                                     |
-| GET                | `/api/me`                   | authentifie                                                                                     |
-| GET, POST          | `/api/projects`             | authentifie (POST -> createur devient responsable)                                              |
-| GET, PATCH, DELETE | `/api/projects/:id`         | membres/responsable (PATCH/DELETE: responsable)                                                 |
-| GET, POST          | `/api/projects/:id/tasks`   | membres/responsable (POST: responsable) — filtres `?status=&priority=&assigned_user_id=`        |
-| GET, PATCH, DELETE | `/api/tasks/:id`            | membres/responsable (PATCH/DELETE: responsable)                                                 |
-| PATCH              | `/api/tasks/:id/status`     | responsable **ou** utilisateur assigne                                                          |
-| GET                | `/api/stats/top-completers` | responsable — top 5 utilisateurs par taches terminees (30 derniers jours), limite a ses projets |
+| Methode | Route | Acces |
+|---|---|---|
+| POST | `/api/login` | public |
+| POST | `/api/logout` | authentifie |
+| GET | `/api/me` | authentifie |
+| GET, POST | `/api/projects` | authentifie (POST -> createur devient responsable) |
+| GET, PATCH, DELETE | `/api/projects/:id` | membres/responsable (PATCH/DELETE: responsable) |
+| GET, POST | `/api/projects/:id/tasks` | membres/responsable (POST: responsable) — filtres `?status=&priority=&assigned_user_id=` |
+| GET, PATCH, DELETE | `/api/tasks/:id` | membres/responsable (PATCH/DELETE: responsable) |
+| PATCH | `/api/tasks/:id/status` | responsable **ou** utilisateur assigne |
+| GET | `/api/stats/top-completers` | responsable — top 5 utilisateurs par taches terminees (30 derniers jours), limite a ses projets |
 
 Exemple d'appel :
 
@@ -72,7 +70,7 @@ Points notables :
 - **Aucune information sensible exposee** : `passwordHash` n'est jamais selectionne dans les
   reponses API (`select` explicite partout, pas de `SELECT *`/`findMany()` sans projection).
 - **Prevention des problemes N+1** : les listes (`GET /api/projects`, `GET
-/api/projects/:id/tasks`) utilisent des `select`/`include` Prisma qui generent une requete
+  /api/projects/:id/tasks`) utilisent des `select`/`include` Prisma qui generent une requete
   SQL par relation chargee (pas une requete par ligne). Voir section "Question
   donnees/performance" ci-dessous pour le detail.
 - **Cookies httpOnly + sameSite=lax** pour la session plutot qu'un token expose au
@@ -164,5 +162,3 @@ Problemes identifies (transposables a l'equivalent Next.js) :
   si le volume de donnees le justifie en production.
 - `npx prisma generate` necessite un acces reseau complet (telecharge le moteur Prisma) ;
   a executer dans un environnement avec acces internet standard.
-#   o b i t - a p i  
- 

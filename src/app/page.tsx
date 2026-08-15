@@ -42,19 +42,12 @@ function MethodBadge({ method }: { method: ApiRoute["method"] }) {
 
 export default function Home() {
   return (
-    <main
-      style={{
-        maxWidth: "880px",
-        margin: "0 auto",
-        padding: "72px 24px 96px",
-        position: "relative",
-      }}
-    >
+    <main className="page-container">
       <div style={{ position: "relative" }}>
-        <OrbitRings />
-        <div style={{ position: "absolute", top: 0, right: 0 }}>
-          <ThemeToggle />
+        <div className="orbit-rings-wrap">
+          <OrbitRings />
         </div>
+        <ThemeToggle />
         <div
           style={{
             fontFamily: "var(--font-mono)",
@@ -67,18 +60,7 @@ export default function Home() {
         >
           Orbit · API interne
         </div>
-        <h1
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "34px",
-            lineHeight: 1.25,
-            margin: "0 0 16px",
-            maxWidth: "560px",
-            fontWeight: 600,
-          }}
-        >
-          Suivi de projets &amp; taches
-        </h1>
+        <h1 className="page-title">Suivi de projets &amp; taches</h1>
         <p
           style={{
             color: "var(--text-dim)",
@@ -143,12 +125,8 @@ export default function Home() {
             {group.routes.map((route, i) => (
               <div
                 key={route.method + route.path}
+                className="route-row"
                 style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "baseline",
-                  gap: "4px 16px",
-                  padding: "14px 18px",
                   borderTop: i === 0 ? "none" : "1px solid var(--border-soft)",
                 }}
               >
@@ -172,30 +150,14 @@ export default function Home() {
                 >
                   {route.role}
                 </span>
-                <span
-                  style={{
-                    fontSize: "11.5px",
-                    fontFamily: "var(--font-mono)",
-                    color: "var(--text-faint)",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {route.access}
-                </span>
+                <span className="route-access">{route.access}</span>
               </div>
             ))}
           </div>
         </section>
       ))}
 
-      <section
-        style={{
-          marginTop: "56px",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "16px",
-        }}
-      >
+      <section className="footer-links">
         <Link
           href="/docs"
           style={{

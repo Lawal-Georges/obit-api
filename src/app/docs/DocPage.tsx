@@ -21,14 +21,8 @@ export function DocPage({
   const html = marked.parse(markdown, { async: false }) as string;
 
   return (
-    <main
-      style={{
-        maxWidth: "760px",
-        margin: "0 auto",
-        padding: "56px 24px 96px",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+    <main className="docs-container">
+      <div className="doc-header">
         <Link
           href={backHref}
           style={{
